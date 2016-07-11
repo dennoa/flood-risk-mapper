@@ -1,0 +1,23 @@
+<div class="container-fluid settings">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="apiKey" class="control-label col-sm-3">API Key</label>
+      <div class="col-sm-3">
+        <input id="apiKey" type="text" class="form-control" [(ngModel)]="settings.apiKey" placeholder="api key"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="maxDistance" class="control-label col-sm-3">Max distance from selected location</label>
+      <div class="col-sm-3">
+        <input id="maxDistance" type="number" class="form-control" [(ngModel)]="settings.maxDistance" min="0" placeholder="max distance from selected point"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="limit" class="control-label col-sm-3">Max number of results</label>
+      <div class="col-sm-3">
+        <input id="limit" type="number" class="form-control" [(ngModel)]="settings.limit" min="1" placeholder="max number of results"/>
+      </div>
+    </div>
+  </form>
+</div>
+

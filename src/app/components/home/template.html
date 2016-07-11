@@ -1,0 +1,14 @@
+<!-- this creates a google map on the page with the given lat/lng from the component as the initial center of the map: -->
+<sebm-google-map [latitude]="coords.lat" [longitude]="coords.lng" [zoom]="15" (mapClick)="setFloodRiskInfo($event)">
+  <sebm-google-map-marker [latitude]="coords.lat" [longitude]="coords.lng">
+    <sebm-google-map-info-window [maxWidth]="500" [isOpen]="true">
+      <table class="address-flood-info">
+        <tr *ngFor="let address of addresses | async">
+          <td>{{address.full_address}}</td>
+          <td><img class="risk-level" src="{{address.flood_frequency | floodCodeImg}}"/></td>
+          <td><img class="risk-level" src="{{address.average_annual_loss | floodCodeImg}}"/></td>
+        </tr>
+      </table>
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+</sebm-google-map>
