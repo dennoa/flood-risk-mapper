@@ -1,6 +1,7 @@
 <div class="about">
-    <p>Uses the flood risk api here: <a href="{{apiUrl}}">{{apiUrl}}</a> to find flood risk information.</p>
-    <p>Click on the map to find flood risk information for properties around that location.</p>
+    <p>This app uses the flood risk api here: <a href="{{apiUrl}}">{{apiUrl}}</a> to find flood risk information.</p>
+    <p>Click on the map or drag the circle to find flood risk information for properties near a location.</p>
+    <p>On the Settings tab you can change the radius for inclusion of results as well as the number of results returned.</p> 
     <p>Each property will indicate flood frequency and average annual loss (in that order) like this:</p>
     <table>
       <tr *ngFor="let code of riskCodes">

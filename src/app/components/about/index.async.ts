@@ -13,7 +13,7 @@ import { FloodCodeDescriptionPipe, FloodCodeImgPipe } from '../../pipes/flood-co
 
 export class About {
     apiUrl: string;
-    riskCodes = ['N','L','M','H'];
+    riskCodes = ['N', 'L', 'M', 'H'];
 
     constructor(config: Config) {
         this.apiUrl = config.apiUrl;

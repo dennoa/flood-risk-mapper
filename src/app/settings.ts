@@ -1,8 +1,8 @@
 export class Settings {
+  static instance: Settings;
   apiKey: string;
   maxDistance: number;
   limit: number;
-  static instance: Settings;
 
   static getInstance() {
     if (!Settings.instance) {
@@ -11,14 +11,14 @@ export class Settings {
     return Settings.instance;
   }
 
-  setApiKey(apiKey: string) {
-    this.apiKey = apiKey;
-  }
-
   private static withDefaults(): Settings {
     let settings = new Settings();
     settings.maxDistance = 100;
     settings.limit = 3;
     return settings;
+  }
+
+  setApiKey(apiKey: string) {
+    this.apiKey = apiKey;
   }
 }

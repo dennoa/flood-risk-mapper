@@ -7,11 +7,11 @@ export class Config {
   apiUrl = 'http://flood-risk-api-test.app.skyops.io/';
   settings = Settings.getInstance();
 
-  apiHeaders(): Headers { 
+  apiHeaders(): Headers {
     return new Headers({
-      'Content-Type': 'application/json', 
-      'Accept': 'application/json', 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
       'x-iag-api-key': this.settings.apiKey
-    }); 
+    });
   }
 }

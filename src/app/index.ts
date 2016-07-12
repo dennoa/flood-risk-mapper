@@ -1,5 +1,5 @@
 /// src/app/index.ts
-import {Component, OpaqueToken} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 import {FORM_PROVIDERS} from '@angular/common';
 

@@ -1,4 +1,4 @@
-import {Home} from './components/home'; 
+import {Home} from './components/home';
 import {SettingsForm} from './components/settings';
 
 export default [
