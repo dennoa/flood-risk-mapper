@@ -4,7 +4,7 @@ import {Settings} from '../../settings';
 
 @Injectable()
 export class Config {
-  apiUrl = 'http://flood-risk-api-test.app.skyops.io/';
+  apiUrl = 'http://flood-risk-api.app.skyops.io/';
   settings = Settings.getInstance();
 
   apiHeaders(): Headers {
