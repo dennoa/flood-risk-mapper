@@ -18,6 +18,14 @@
         <input id="limit" type="number" class="form-control" [(ngModel)]="settings.limit" min="1" placeholder="max number of results"/>
       </div>
     </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Show surrounding area flood fequency</label>
+      <div class="col-sm-3">
+        <select class="form-control" [(ngModel)]="settings.selectedFloodFrequency">
+          <option *ngFor="let code of floodCodes" value="{{code}}">{{code | floodCodeDescription}}</option>
+        </select>
+      </div>
+    </div>
   </form>
 </div>
 

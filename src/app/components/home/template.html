@@ -7,10 +7,13 @@
           <tr *ngFor="let address of addresses | async">
             <td>{{address.full_address}}</td>
             <td><img class="risk-level" src="{{address.flood_frequency | floodCodeImg}}"/></td>
-            <td><img class="risk-level" src="{{address.average_annual_loss | floodCodeImg}}"/></td>
+            <td><img class="risk-level" src="{{address.average_annual_damage | floodCodeImg}}"/></td>
           </tr>
         </table>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
   </sebm-google-map-circle>
+  <sebm-google-map-marker *ngFor="let address of surroundingAddresses | async" 
+    [latitude]="address.latitude" [longitude]="address.longitude" iconUrl="{{settings.selectedFloodFrequency | floodCodeMarker}}">
+  </sebm-google-map-marker>
 </sebm-google-map>

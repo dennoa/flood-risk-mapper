@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { Config } from '../../services/api/config';
-import { FloodCodeDescriptionPipe, FloodCodeImgPipe } from '../../pipes/flood-code';
+import { FloodCode, FloodCodeDescriptionPipe, FloodCodeImgPipe } from '../../pipes/flood-code';
 
 @Component({
     selector: 'about',
@@ -13,11 +13,10 @@ import { FloodCodeDescriptionPipe, FloodCodeImgPipe } from '../../pipes/flood-co
 
 export class About {
     apiUrl: string;
-    riskCodes = ['N', 'L', 'M', 'H'];
+    floodCodes = FloodCode.all;
 
     constructor(config: Config) {
         this.apiUrl = config.apiUrl;
     }
-
 }
 
