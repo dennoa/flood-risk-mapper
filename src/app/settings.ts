@@ -3,9 +3,9 @@ export class Settings {
   apiKey: string;
   maxDistance: number;
   limit: number;
-  selectedFloodFrequency: string;
+  markOnMap: string;
 
-  static getInstance() {
+  static getInstance(): Settings {
     if (!Settings.instance) {
       Settings.instance = Settings.withDefaults();
     }
@@ -16,8 +16,7 @@ export class Settings {
     let settings = new Settings();
     settings.maxDistance = 100;
     settings.limit = 3;
-    settings.selectedFloodFrequency = 'H';
-    settings.selectedAnnualDamage = 'H';
+    settings.markOnMap = 'flood_frequency';
     return settings;
   }
 }

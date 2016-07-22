@@ -1,19 +1,29 @@
 <!-- this creates a google map on the page with the given lat/lng from the component as the initial center of the map: -->
 <sebm-google-map [latitude]="initialCoords.lat" [longitude]="initialCoords.lng" [zoom]="15" (mapClick)="setFloodRiskInfo($event)">
-  <sebm-google-map-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="settings.maxDistance" [circleDraggable]="true" (dragEnd)="setFloodRiskInfo($event)">
-    <sebm-google-map-marker [latitude]="coords.lat" [longitude]="coords.lng">
+  <sebm-google-map-circle [latitude]="mapState.coords.lat" [longitude]="mapState.coords.lng" [radius]="settings.maxDistance" [circleDraggable]="true" (dragEnd)="setFloodRiskInfo($event)">
+    <sebm-google-map-marker [latitude]="mapState.coords.lat" [longitude]="mapState.coords.lng">
       <sebm-google-map-info-window [maxWidth]="500" [isOpen]="true">
-        <table class="address-flood-info">
+        <table class="address-flood-info" *ngIf="!isSearching">
           <tr *ngFor="let address of addresses | async">
             <td>{{address.full_address}}</td>
             <td><img class="risk-level" src="{{address.flood_frequency | floodCodeImg}}"/></td>
             <td><img class="risk-level" src="{{address.average_annual_damage | floodCodeImg}}"/></td>
           </tr>
         </table>
+        <img *ngIf="isSearching" src="img/loading.gif"/>
       </sebm-google-map-info-window>
     </sebm-google-map-marker>
   </sebm-google-map-circle>
-  <sebm-google-map-marker *ngFor="let address of surroundingAddresses | async" 
-    [latitude]="address.latitude" [longitude]="address.longitude" iconUrl="{{settings.selectedFloodFrequency | floodCodeMarker}}">
-  </sebm-google-map-marker>
+  <div *ngIf="settings.markOnMap.length > 0">
+    <sebm-google-map-marker *ngFor="let address of addresses | async" 
+      [latitude]="address.latitude" [longitude]="address.longitude" iconUrl="{{address[settings.markOnMap] | floodCodeMarker}}">
+      <sebm-google-map-info-window [maxWidth]="500" [isOpen]="false">
+        <div class="address-flood-info">
+          <span>{{address.full_address}}</span>
+          <img class="risk-level" src="{{address.flood_frequency | floodCodeImg}}"/>
+          <img class="risk-level" src="{{address.average_annual_damage | floodCodeImg}}"/>
+        </div>
+      </sebm-google-map-info-window>
+    </sebm-google-map-marker>
+  </div>
 </sebm-google-map>

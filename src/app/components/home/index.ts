@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FORM_DIRECTIVES } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { GOOGLE_MAPS_DIRECTIVES } from 'angular2-google-maps/core';
 import { FloodCodeDescriptionPipe, FloodCodeImgPipe, FloodCodeMarkerPipe } from '../../pipes/flood-code';
 import { FloodRiskApi } from '../../services/api/flood-risk-api';
 import { Address, AddressSearchParams } from '../../services/address';
 import { GeocodeSearchParams } from '../../services/geocode';
 import { Settings } from '../../settings';
+import { MapState } from './map-state';
 
 @Component({
   selector: 'home',
@@ -18,21 +20,15 @@ import { Settings } from '../../settings';
 
 export class Home implements OnInit {
   settings = Settings.getInstance();
-  initialCoords = {
-    lat: -27.467302692617668,
-    lng: 153.02736282348633
-  }; 
-  coords = {
-    lat: this.initialCoords.lat,
-    lng: this.initialCoords.lng
-  };
+  mapState = MapState.getInstance();
+  initialCoords = this.mapState.coords; 
   addresses: Observable<Address[]>;
-  surroundingAddresses: Observable<Address[]>;
+  isSearching: boolean;
 
   constructor(private floodRiskApi: FloodRiskApi) {}
 
   setFloodRiskInfo(event) {
-    this.coords = event.coords;
+    this.mapState.coords = event.coords;
     this.searchGeocode();
   }
 
@@ -41,24 +37,16 @@ export class Home implements OnInit {
   }
 
   private searchGeocode() {
+    this.isSearching = true;
     let params = new GeocodeSearchParams();
-    params.latitude = this.coords.lat;
-    params.longitude = this.coords.lng;
+    params.latitude = this.mapState.coords.lat;
+    params.longitude = this.mapState.coords.lng;
     params.max_distance = this.settings.maxDistance;
     params.limit = this.settings.limit;
     this.addresses = this.floodRiskApi.searchAddressGeocode(params);
-    this.addresses.subscribe((addresses)=> {
-      if (addresses.length > 0) {
-        this.searchFloodCode(addresses[0].postcode);
-      }
+    this.addresses.subscribe(addresses=> {
+      this.isSearching = false;
     });
   }
 
-  private searchFloodCode(postcode) {
-    let params = new AddressSearchParams();
-    params.postcode = postcode;
-    params.flood_frequency = this.settings.selectedFloodFrequency;
-    params.limit = 50;
-    this.surroundingAddresses = this.floodRiskApi.searchAddress(params);
-  }
 }

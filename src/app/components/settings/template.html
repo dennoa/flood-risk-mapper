@@ -3,26 +3,31 @@
     <div class="form-group">
       <label for="apiKey" class="control-label col-sm-3">API Key</label>
       <div class="col-sm-3">
-        <input id="apiKey" type="text" class="form-control" [(ngModel)]="settings.apiKey" placeholder="api key"/>
+        <input id="apiKey" type="text" class="form-control" [(ngModel)]="settings.apiKey" name="apiKey" ngControl="apiKey" #apiKey="ngForm" required placeholder="api key"/>
+        <div [hidden]="apiKey.valid || apiKey.pristine" class="alert alert-danger">API key is required</div>
       </div>
     </div>
     <div class="form-group">
       <label for="maxDistance" class="control-label col-sm-3">Radius for inclusion of results (in metres)</label>
       <div class="col-sm-3">
-        <input id="maxDistance" type="number" class="form-control" [(ngModel)]="settings.maxDistance" min="0" placeholder="max distance from selected point"/>
+        <input id="maxDistance" type="number" class="form-control" [(ngModel)]="settings.maxDistance" name="maxDistance" ngControl="maxDistance" #maxDistance="ngForm" min="0" max="2000" required (keyup)="checkMaxDistance()" placeholder="max distance from selected point"/>
+        <div [hidden]="maxDistance.valid || maxDistance.pristine" class="alert alert-danger">Distance must be between 0 and 2000 metres</div>
       </div>
     </div>
     <div class="form-group">
       <label for="limit" class="control-label col-sm-3">Max number of results</label>
       <div class="col-sm-3">
-        <input id="limit" type="number" class="form-control" [(ngModel)]="settings.limit" min="1" placeholder="max number of results"/>
+        <input id="limit" type="number" class="form-control" [(ngModel)]="settings.limit" name="limit" ngControl="limit" #limit="ngForm" min="1" max="50" required (keyup)="checkLimit()" placeholder="max number of results"/>
+        <div [hidden]="limit.valid || limit.pristine" class="alert alert-danger">Number of results must be between 1 and 50</div>
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-3">Show surrounding area flood fequency</label>
+      <label class="control-label col-sm-3">Mark on map</label>
       <div class="col-sm-3">
-        <select class="form-control" [(ngModel)]="settings.selectedFloodFrequency">
-          <option *ngFor="let code of floodCodes" value="{{code}}">{{code | floodCodeDescription}}</option>
+        <select class="form-control" [(ngModel)]="settings.markOnMap">
+          <option value="">None</option>
+          <option value="flood_frequency">Flood Frequency</option>
+          <option value="average_annual_damage">Average Annual Damage</option>
         </select>
       </div>
     </div>

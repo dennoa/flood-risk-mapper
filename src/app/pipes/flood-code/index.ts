@@ -12,7 +12,7 @@ export class FloodCodeDescriptionPipe implements PipeTransform {
   };
 
   transform(code: string): string {
-    return this.codeDescriptions[code || 'N'];
+    return this.codeDescriptions[code];
   }
 }
 
@@ -24,7 +24,7 @@ export class FloodCodeImgPipe implements PipeTransform {
   };
 
   transform(code: string): string {
-    return this.codeDescriptions[code || 'N'];
+    return this.codeDescriptions[code] || 'img/question_mark.png';
   }
 }
 
@@ -36,6 +36,6 @@ export class FloodCodeMarkerPipe implements PipeTransform {
   };
 
   transform(code: string): string {
-    return this.codeDescriptions[code || 'N'];
+    return this.codeDescriptions[code] || 'img/question_marker.gif';
   }
 }

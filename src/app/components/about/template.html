@@ -1,13 +1,15 @@
-<div class="about">
-    <p>This app uses the flood risk api here: <a href="{{apiUrl}}">{{apiUrl}}</a> to find flood risk information.</p>
-    <p>Click on the map or drag the circle to find flood risk information for properties near a location.</p>
-    <p>On the Settings tab you can change the radius for inclusion of results as well as the number of results returned.</p> 
-    <p>Each property will indicate flood frequency and average annual damage (in that order) like this:</p>
-    <table>
-      <tr *ngFor="let code of floodCodes">
-        <td><img class="risk-level" src="{{code | floodCodeImg}}"/></td>
-        <td>{{code | floodCodeDescription}}</td>
-      </tr>
-    </table> 
+<div class="container-fluid about">
+  <ul>
+    <li>This app uses the flood risk api here: <a href="{{apiUrl}}">{{apiUrl}}</a> to find flood risk information.</li>
+    <li>Click on the map or drag the circle to find flood risk information for properties near a location.</li>
+    <li>On the Settings tab you can change options such as the radius for inclusion of results and the number of results returned. You can also specify the api key required to access the data.</li> 
+    <li>Each property listed will indicate <mark>flood frequency</mark> and <mark>average annual damage</mark> (in that order). The indicators look like this:
+      <span *ngFor="let code of floodCodes">
+        <img class="risk-level" src="{{code | floodCodeImg}}"/>
+        {{code | floodCodeDescription}}
+      </span>
+    </li>
+    <li>If you are plotting matched properties on the map, then you can click an individual property marker to see the address and flood risk indicators.</li>
+  </ul>
 </div>
 
