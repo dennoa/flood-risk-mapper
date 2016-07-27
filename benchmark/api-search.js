@@ -12,5 +12,5 @@ module.exports = (testConditions, path, deferred)=> {
   }).catch((err)=> {
     console.log(err);
     deferred.resolve();
-  })
+  });
 };

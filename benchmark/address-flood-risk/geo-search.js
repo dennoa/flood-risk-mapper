@@ -23,11 +23,11 @@ function acrossSydney(deferred) {
   let latitude = -33.89264740799733;
   let longitudeWest = 151.00879669189453;
   let longitudeEast = 151.27418518066406;
-  let steps = 20;
+  let steps = 5;
   let stepSize = (longitudeEast - longitudeWest) / steps;
   let conditions = [];
   while (longitudeWest <= longitudeEast) {
-    conditions.push({ latitude: latitude, longitude: longitudeWest, limit: 50, max_distance: 1000 });
+    conditions.push({ latitude: latitude, longitude: longitudeWest, limit: 20, max_distance: 200 });
     longitudeWest += stepSize;
   }
   return apiSearch(conditions, '/address-flood-risk/geo-search', deferred);
