@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 export class FloodCode {
-  public static all = ['N','L','M','H'];
+  public static all = ['N', 'L', 'M', 'H'];
 }
 
 @Pipe({name: 'floodCodeDescription'})
